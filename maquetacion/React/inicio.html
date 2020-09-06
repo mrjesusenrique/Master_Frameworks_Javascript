@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maquetación Web</title>
+    <link rel="stylesheet" href="css/main.css">
+
+    <script type="text/javascript">
+
+        window.addEventListener("load", function () {
+
+
+            var template = document.getElementById("article-template");
+            var articles = document.getElementById("articles");
+
+            for (var i = 1; i <= 5; i++) {
+                var clonado = template.cloneNode(true);
+
+                clonado.removeAttribute("id");
+                var h2 = clonado.getElementsByTagName("h2")[0];
+                h2.innerHTML = h2.textContent + ' ' + i;
+                articles.appendChild(clonado);
+            }
+        });
+
+    </script>
+
+
+
+</head>
+
+<body>
+    <header id="header">
+        <div class="center">
+            <div id="logo">
+                <img src="images/react.svg" alt="logotipo" class="app-logo">
+                <span id="brand">
+                    <strong>Master</strong>ReactJS
+                </span>
+            </div>
+
+            <nav id="menu">
+                <ul>
+                    <li><a href="inicio.html">Inicio</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="formulario.html">Formulario</a></li>
+                    <li><a href="#">Página1</a></li>
+                    <li><a href="#">Página2</a></li>
+
+                </ul>
+            </nav>
+        </div>
+        <div class="clearfix"></div>
+    </header>
+
+    <div id="slider" class="slider-big">
+        <h1>Bienvenido al Master en Framework ReactJS</h1>
+        <a href="blog.html" class="btn-white">Ir al Blog</a>
+    </div>
+
+    <div class="center">
+        <section id="content">
+            <h2 class="sub-header">Últimos Artículos</h2>
+
+
+
+            <div id="articles">
+                <article class="article-item" id="article-template">
+                    <div class="image-wrap">
+                        <img src="images/introdes.png" alt="intro">
+                    </div>
+
+                    <h2 class="sub-header">Artículo de prueba</h2>
+
+                    <span class="date">
+                        hace 5 minutos
+                    </span>
+
+                    <a href="article.html">Leer más</a>
+                    <div class="clearfix"></div>
+                </article>
+
+            </div>
+        </section>
+
+        <aside id="sidebar">
+            <div id="nav-blog" class="sidebar-item">
+                <h3>Puedes hacer esto</h3>
+                <a href="#" class="btn btn-success">Crear Articulo</a>
+            </div>
+
+            <div id="search" class="sidebar-item">
+                <h3>Buscador</h3>
+                <p>Encuentra el artículo que buscas</p>
+                <form action="">
+                    <input type="text" name="search">
+                    <input type="submit" name="submit" value="buscar" class="btn">
+                </form>
+            </div>
+        </aside>
+
+        <div class="clearfix"></div>
+    </div>
+
+    <footer id="footer">
+        <div class="center">
+            <p>
+                &copy; Master en ReactJS.
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
