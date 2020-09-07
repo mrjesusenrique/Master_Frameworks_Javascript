@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function Slider() {
+export default function Slider(props) {
     return (
         <div id="slider" className="slider-big">
-            <h1>Bienvenido al Master en Framework ReactJS</h1>
-            <a href="blog.html" className="btn-white">Ir al Blog</a>
+            <h1>{props.title}</h1>
+            <a href="blog.html" className="btn-white">{props.btn}</a>
         </div>
     );
 };

@@ -8,11 +8,16 @@ import SeccionPruebas from './components/SeccionPruebas';
 
 function App() {
 
+  const titleSlider = "Bienvenido al Master en  el Framework ReactJS de Javascript";
+  const buttonString = "Ver más";
+
   return (
     <div className="App">
       <Header />
-      <Slider />
-
+      <Slider
+        title={titleSlider}
+        btn={buttonString}
+      />
 
       <div className="center">
         <SeccionPruebas />

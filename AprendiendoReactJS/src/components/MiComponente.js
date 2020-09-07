@@ -11,8 +11,8 @@ export default function MiComponente() {
 
         return (
             <div className="mi-componente">
-                <h1>{`Receta: ${receta.nombre}`}</h1>
-                <h2>{`Calorias: ${receta.calorias}`}</h2>
+                <p>{`Receta: ${receta.nombre}`}</p>
+                <p>{`Calorias: ${receta.calorias}`}</p>
                 <ol>
                     {
                         receta.ingredientes.map((ingrediente, i) => {
