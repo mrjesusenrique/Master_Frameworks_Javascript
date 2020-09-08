@@ -1,12 +1,75 @@
-import React from 'react';
-import MensajeEstatico from './MensajeEstatico';
+import React, { Component } from 'react';
+import Pelicula from './Pelicula';
 
-export default function Peliculas() {
+class Peliculas extends Component {
 
-    return (
-        <React.Fragment>
-            <h4>Este es mi componente de Películas</h4>
-            <MensajeEstatico />
-        </React.Fragment>
-    );
+    state = {
+        peliculas: [
+            { titulo: 'Spider-Man', imagen: 'https://cdn.lanetaneta.com/wp-content/uploads/2020/04/1586934299_212_Las-peliculas-de-Spider-Man-clasificadas.jpeg' },
+            { titulo: 'Spider-Man 2', imagen: 'https://i.blogs.es/9da463/spiderman-2-cartel/450_1000.jpg' },
+            { titulo: 'Spider-Man 3', imagen: 'https://blogdesuperheroes.es/wp-content/plugins/BdSGallery/BdSGaleria/33973.jpg' }
+        ],
+
+        nombre: 'Jesús Casañas',
+
+        favorita: ''
+    };
+
+    cambiarTitulo = () => {
+
+        const { peliculas } = this.state;
+        peliculas[0].titulo = "El Hombre Araña";
+
+        this.setState({
+            peliculas: peliculas
+        });
+    };
+
+    favorita = (pelicula) => {
+        this.setState({
+            favorita: pelicula
+        });
+    };
+
+    render() {
+
+        let pStyle = {
+            background: 'green',
+            color: 'white',
+            padding: '10px'
+        };
+
+        return (
+            <div id="content" className="peliculas">
+                <h1 className="subheader">Películas</h1>
+                <p>Selección de las películas favorias de {this.state.nombre}</p>
+                <button onClick={this.cambiarTitulo}>Cambiar el título de la primera película a español</button>
+
+                {this.state.favorita.titulo &&
+                    <p className="favorita" style={pStyle}>
+                        <strong>La película favorita es: </strong>
+                        <span>{this.state.favorita.titulo}</span>
+                    </p>
+                }
+
+                <div id="articles" className="peliculas">
+                    {
+                        this.state.peliculas.map((pelicula, i) => {
+                            return (
+                                <Pelicula
+
+                                    key={i}
+                                    pelicula={pelicula}
+                                    marcarFavorita={this.favorita}
+                                />
+                            );
+                        })
+                    }
+                </div>
+            </div>
+        );
+    };
 };
+
+export default Peliculas;
+

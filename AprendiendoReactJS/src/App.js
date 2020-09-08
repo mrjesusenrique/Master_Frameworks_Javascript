@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Slider from './components/Slider';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
+import Peliculas from './components/Peliculas';
 import SeccionPruebas from './components/SeccionPruebas';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
       />
 
       <div className="center">
-        <SeccionPruebas />
+        <Peliculas />
         <Sidebar />
         <div className="clearfix"></div>
       </div>
