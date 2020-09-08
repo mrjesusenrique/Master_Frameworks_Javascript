@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Pelicula extends Component {
 
     marcar = () => {
-        this.props.marcarFavorita(this.props.pelicula);
+        this.props.marcarFavorita(this.props.pelicula, this.props.indice);
     };
 
     render() {
