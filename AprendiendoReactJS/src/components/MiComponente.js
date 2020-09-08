@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function MiComponente() {
+export default function MiComponente(props) {
 
     {
         const receta = {
@@ -11,8 +11,8 @@ export default function MiComponente() {
 
         return (
             <div className="mi-componente">
-                <p>{`Receta: ${receta.nombre}`}</p>
-                <p>{`Calorias: ${receta.calorias}`}</p>
+                <h1>{`Receta: ${receta.nombre}`}</h1>
+                <h1>{`Calorias: ${receta.calorias}`}</h1>
                 <ol>
                     {
                         receta.ingredientes.map((ingrediente, i) => {
@@ -26,6 +26,15 @@ export default function MiComponente() {
                         })
                     }
                 </ol>
+                <hr />
+
+                {props.saludo &&
+                    <React.Fragment>
+                        <h1>Desde una prop</h1>
+                        <h3>{props.saludo}</h3>
+                    </React.Fragment>
+                }
+
             </div>
         );
     };
