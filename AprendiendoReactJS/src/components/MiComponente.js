@@ -34,7 +34,6 @@ export default function MiComponente(props) {
                         <h3>{props.saludo}</h3>
                     </React.Fragment>
                 }
-
             </div>
         );
     };
