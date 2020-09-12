@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Blog from './components/Blog';
+import Formulario from './components/Formulario';
 
 export default function Router() {
 
@@ -19,6 +20,8 @@ export default function Router() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/home" component={Home} />
                 <Route exact path="/blog" component={Blog} />
+                <Route exact path="/formulario" component={Formulario} />
+                <Route exact path="/peliculas" component={Peliculas} />
                 <Route exact path="/seccion-pruebas" component={SeccionPruebas} />
                 <Route exact path="/mi-componente" component={MiComponente} />
 
