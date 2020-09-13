@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from './Slider';
 import Sidebar from './Sidebar';
+import Articles from './Articles';
 
 export default function Blog() {
 
@@ -14,9 +15,10 @@ export default function Blog() {
             />
             <div className="center">
                 <div id="content">
-            
+                    <Articles />
                 </div>
-                <Sidebar 
+
+                <Sidebar
                     blog="true"
                 />
             </div>
