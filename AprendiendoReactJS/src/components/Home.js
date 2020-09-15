@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from './Slider';
 import Sidebar from './Sidebar';
+import Articles from './Articles';
 
 export default function Home() {
 
@@ -17,6 +18,9 @@ export default function Home() {
             <div className="center">
                 <div id="content">
                     <h1 className="subheader">Últimos Artículos</h1>
+                    <Articles
+                        home="true"
+                    />
                 </div>
                 <Sidebar />
             </div>

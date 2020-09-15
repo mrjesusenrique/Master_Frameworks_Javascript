@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Moment from 'react-moment';
+import { Link } from 'react-router-dom';
+import 'moment/locale/es';
 import Global from '../Global';
 import imageNotFound from '../assets/images/notFound.jpg';
 
@@ -13,7 +16,44 @@ class Articles extends Component {
     };
 
     componentWillMount() {
-        this.getArticles();
+        var home = this.props.home;
+        var search = this.props.search;
+
+        if (home === 'true') {
+            this.getLastArticles();
+        } else if (search && search !== null && search !== undefined) {
+            this.getArticlesBySearch(search);
+        } else {
+            this.getArticles();
+        };
+    };
+
+    getArticlesBySearch = (searched) => {
+        axios.get(this.url + 'search/' + searched)
+            .then(respuesta => {
+
+                this.setState({
+                    articles: respuesta.data.articulos,
+                    status: 'success'
+                });
+
+            }).catch(error => {
+                this.setState({
+                    articles: [],
+                    status: 'success'
+                });
+            });
+    };
+
+    getLastArticles = () => {
+        axios.get(this.url + 'articles/last')
+            .then(respuesta => {
+
+                this.setState({
+                    articles: respuesta.data.articulos,
+                    status: 'success'
+                });
+            });
     };
 
     getArticles = () => {
@@ -24,8 +64,6 @@ class Articles extends Component {
                     articles: respuesta.data.articulos,
                     status: 'success'
                 });
-
-                console.log(this.state);
             });
     };
 
@@ -50,10 +88,12 @@ class Articles extends Component {
                         <h2 className="sub-header">{article.title}</h2>
 
                         <span className="date">
-                            {article.date}
+                            <Moment locale="es" fromNow>
+                                {article.date}
+                            </Moment>
                         </span>
 
-                        <a href="article.html">Leer más</a>
+                        <Link to={'blog/articulo/' + article._id}>Leer más</Link>
                         <div className="clearfix"></div>
                     </article>
                 );

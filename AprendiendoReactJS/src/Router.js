@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import SeccionPruebas from './components/SeccionPruebas';
 import MiComponente from './components/MiComponente';
 import Peliculas from './components/Peliculas';
@@ -9,6 +9,8 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Blog from './components/Blog';
 import Formulario from './components/Formulario';
+import Search from './components/Search';
+import Article from './components/Article';
 
 export default function Router() {
 
@@ -20,6 +22,18 @@ export default function Router() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/home" component={Home} />
                 <Route exact path="/blog" component={Blog} />
+                <Route exact path="/blog/articulo/:id" component={Article} />
+                <Route exact path="/blog/busqueda/:search" component={Search} />
+
+                <Route exact path="/redirect/:search" render={(props) => {
+
+                    var search = props.match.params.search;
+                    return (
+                        <Redirect to={'/blog/busqueda/' + search} />
+                    );
+                }
+                } />
+                
                 <Route exact path="/formulario" component={Formulario} />
                 <Route exact path="/peliculas" component={Peliculas} />
                 <Route exact path="/seccion-pruebas" component={SeccionPruebas} />
