@@ -138,9 +138,9 @@ let controller = {
 
         // Buscar el artículo por ID
 
-        Article.findById(articuloId, (error, articulo) => {
+        Article.findById(articuloId, (error, article) => {
 
-            if (error || !articulo) {
+            if (error || !article) {
                 return respuesta.status(404).send({
                     status: 'Error',
                     message: 'El artículo que está buscando no se encuentra en la Base de Datos'
@@ -152,7 +152,7 @@ let controller = {
             return respuesta.status(200).send({
                 status: 'Success',
                 message: 'El Artículo ha sido extraido de manera exitosa',
-                articulo
+                article
             });
         });
     },

@@ -29,7 +29,7 @@ class Articles extends Component {
     };
 
     getArticlesBySearch = (searched) => {
-        axios.get(this.url + 'search/' + searched)
+        axios.get(`${this.url}search/${searched}`)
             .then(respuesta => {
 
                 this.setState({
@@ -46,7 +46,7 @@ class Articles extends Component {
     };
 
     getLastArticles = () => {
-        axios.get(this.url + 'articles/last')
+        axios.get(`${this.url}articles/last`)
             .then(respuesta => {
 
                 this.setState({
@@ -57,7 +57,7 @@ class Articles extends Component {
     };
 
     getArticles = () => {
-        axios.get(this.url + 'articles')
+        axios.get(`${this.url}articles`)
             .then(respuesta => {
 
                 this.setState({
@@ -77,7 +77,7 @@ class Articles extends Component {
                         <div className="image-wrap">
 
                             {article.image !== null ? (
-                                <img src={this.url + 'get-image/' + article.image} alt={article.title} />
+                                <img src={`${this.url}get-image/${article.image}`} alt={article.title} />
                             ) : (
                                     <img src={imageNotFound} alt={article.title} />
                                 )
@@ -93,7 +93,7 @@ class Articles extends Component {
                             </Moment>
                         </span>
 
-                        <Link to={'blog/articulo/' + article._id}>Leer más</Link>
+                        <Link to={`blog/articulo/${article._id}`}>Leer más</Link>
                         <div className="clearfix"></div>
                     </article>
                 );

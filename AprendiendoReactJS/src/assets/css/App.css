@@ -136,6 +136,19 @@ body{
   
 }
 
+.btn-danger{
+  background-color: red !important;
+  color: white !important;
+  float: left;
+  margin-right: 20px;
+}
+
+.btn-warning{
+  background-color: orange !important;
+  color: white !important;
+  float: left;
+}
+
 .btn-white:hover{
   background: #444;
   color: white;

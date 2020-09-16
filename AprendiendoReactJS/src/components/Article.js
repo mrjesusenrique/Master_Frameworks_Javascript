@@ -1,45 +1,101 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
+import Moment from 'react-moment';
+import 'moment/locale/es';
 import Global from '../Global';
 import Sidebar from './Sidebar';
-import desarrolloWeb from '../assets/images/desarrolloweb.png';
+import imageNotFound from '../assets/images/notFound.jpg';
 
-export default function Article() {
+class Article extends Component {
 
-    return (
-        <div className="center">
-            <section id="content">
+    url = Global.url;
 
-                <article className="article-item article-detail">
-                    <div className="image-wrap">
-                        <img src={desarrolloWeb} alt="intro" />
-                    </div>
+    state = {
+        article: false,
+        status: null
+    };
 
-                    <h1 className="sub-header">Artículo de prueba</h1>
+    componentWillMount() {
+        this.getArticle();
+    };
 
-                    <span className="date">
-                        hace 5 minutos
+    getArticle = () => {
+        var id = this.props.match.params.id;
+
+        axios.get(`${this.url}article/${id}`)
+            .then(respuesta => {
+
+                this.setState({
+                    article: respuesta.data.article,
+                    status: 'success'
+                });
+
+            }).catch(error => {
+                this.setState({
+                    article: false,
+                    status: 'success'
+                });
+            });
+    };
+
+    render() {
+
+        var article = this.state.article;
+
+        return (
+            <div className="center">
+                <section id="content">
+
+                    {article &&
+
+                        <article className="article-item article-detail">
+                            <div className="image-wrap">
+
+                                {article.image !== null ? (
+                                    <img src={`${this.url}get-image/${article.image}`} alt={article.title} />
+                                ) : (
+                                        <img src={imageNotFound} alt={article.title} />
+                                    )
+                                }
+
+                            </div>
+
+                            <h1 className="sub-header">{article.title}</h1>
+
+                            <span className="date">
+                                <Moment locale="es" fromNow>{article.date}</Moment>
                             </span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, totam
-                    dolorem incidunt quasi labore neque praesentium minus nemo officiis odi
-                                 t ipsum sit velit earum itaque dicta dolores? Rem, iste explicabo.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, totam
-                    dolorem incidunt quasi labore neque praesentium minus nemo officiis odi
-                    t ipsum sit velit earum itaque dicta dolores? Rem, iste explicabo.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, totam
-                    dolorem incidunt quasi labore neque praesentium minus nemo officiis odi
-                                t ipsum sit velit earum itaque dicta dolores? Rem, iste explicabo.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, totam
-                    dolorem incidunt quasi labore neque praesentium minus nemo officiis odi
-                                    t ipsum sit velit earum itaque dicta dolores? Rem, iste explicabo.</p>
-                    <div className="clearfix"></div>
-                </article>
 
-            </section>
+                            <p>{article.content}</p>
 
-            <Sidebar />
-            <div className="clearfix"></div>
-        </div>
-    );
+                            <a className="btn btn-danger">Eliminar</a>
+                            <a className="btn btn-warning">Editar</a>
+
+                            <div className="clearfix"></div>
+                        </article>
+                    }
+
+                    {!article && this.state.status === "success" &&
+                        <div id="article">
+                            <h2 className="subheader">El Artículo no existe</h2>
+                            <p>Intentalo de nuevo más tarde</p>
+                        </div>
+                    }
+
+                    {this.state.status === null &&
+                        <div id="article">
+                            <h2 className="subheader">Cargando...</h2>
+                            <p>Espere un momento</p>
+                        </div>
+                    }
+                </section>
+
+                <Sidebar />
+                <div className="clearfix"></div>
+            </div>
+        );
+    };
 };
+
+export default Article;
