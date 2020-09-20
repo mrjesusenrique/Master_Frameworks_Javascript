@@ -220,7 +220,7 @@ body{
   background: #444;  
 }
 
-input[type="text"], textarea{
+input[type="text"], textarea, input[type="file"]{
   width: 100%;
   min-height: 30px;
   border: 1px solid #ccc;
@@ -228,6 +228,14 @@ input[type="text"], textarea{
   padding: 4px;
   transition: 300ms all;
   
+}
+
+input[type="file"]{
+  border: 0;
+}
+
+input[type="submit"]{
+  margin-top: 15px;
 }
 
 textarea{

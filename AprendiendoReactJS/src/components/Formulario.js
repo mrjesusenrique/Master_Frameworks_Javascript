@@ -72,7 +72,7 @@ export default function Formulario() {
 
                         <div className="form-group radio-buttons">
                             <label htmlFor="bio" />Biografia
-                            <textarea name="bio" id="" cols="30" rows="10" ref={bioRef} />
+                            <textarea name="bio" cols="30" rows="10" ref={bioRef} />
                         </div>
 
                         <div className="clearfix"></div>

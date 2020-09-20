@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 export default function Sidebar(props) {
 
@@ -30,7 +30,7 @@ export default function Sidebar(props) {
             {props.blog === 'true' &&
                 <div id="nav-blog" className="sidebar-item">
                     <h3>Puedes hacer esto</h3>
-                    <a href="#" className="btn btn-success">Crear Articulo</a>
+                    <Link to={"/blog/crear"} className="btn btn-success">Crear Articulo</Link>
                 </div>
             }
 

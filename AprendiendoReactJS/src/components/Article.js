@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
 import Moment from 'react-moment';
 import 'moment/locale/es';
 import Global from '../Global';
 import Sidebar from './Sidebar';
 import imageNotFound from '../assets/images/notFound.jpg';
+import { Link } from 'react-router-dom';
 
 class Article extends Component {
 
@@ -69,8 +69,8 @@ class Article extends Component {
 
                             <p>{article.content}</p>
 
-                            <a className="btn btn-danger">Eliminar</a>
-                            <a className="btn btn-warning">Editar</a>
+                            <Link to="/blog" className="btn btn-danger">Eliminar</Link>
+                            <Link to="/blog" className="btn btn-warning">Editar</Link>
 
                             <div className="clearfix"></div>
                         </article>
