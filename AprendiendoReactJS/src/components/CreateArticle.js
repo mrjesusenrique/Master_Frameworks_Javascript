@@ -12,7 +12,8 @@ class CreateArticle extends Component {
 
     state = {
         article: {},
-        status: null
+        status: null,
+        selectedFile: null
     };
 
     changeState = () => {
@@ -22,39 +23,97 @@ class CreateArticle extends Component {
                 content: this.contentRef.current.value
             }
         });
-
-        console.log(this.state);
     };
 
     saveArticle = (e) => {
         e.preventDefault();
 
+        // Rellenar el state con el formulario 
+
         this.changeState();
 
-        axios.post(`${this.url}save`, this.state.article)
-            .then(respuesta => {
+        console.log(this.state);
 
-                if (respuesta.data.article) {
+        // Petición AJAX por post para guardar el artículo en la Base de Datos
+
+        axios.post(`${this.url}save`, this.state.article)
+            .then(res => {
+
+                if (res.data.article) {
+
+                    console.log('Respuesta url/save ', res);
 
                     this.setState({
-                        article: respuesta.data.article,
-                        status: 'success'
+                        article: res.data.article,
+                        status: 'waiting'
                     });
 
-                } else {
+                    // Subir la imagen 
 
+                    if (this.state.selectedFile !== null) {
+
+                        // Sacar el id del artículo guardado
+
+                        var articleId = this.state.article._id;
+
+                        // Crear FormData y añadir fichero 
+
+                        const formData = new FormData();
+
+                        formData.append(
+                            'file0',
+                            this.state.selectedFile,
+                            this.state.selectedFile.name
+                        );
+
+                        // Petición AJAX 
+
+                        axios.post(`${this.url}upload-image/${articleId}`, formData)
+                            .then(res => {
+
+                                console.log('Respuesta url/upload-image/:id: ', res);
+
+                                if (res.data.articulo) {
+                                    this.setState({
+                                        article: res.data.articulo,
+                                        status: 'success'
+                                    });
+
+                                } else {
+                                    this.setState({
+                                        article: res.data.articulo,
+                                        status: 'failed'
+                                    });
+
+                                };
+                            });
+
+                    } else {
+                        this.setState({
+                            status: 'success'
+                        });
+
+                    };
+                } else {
                     this.setState({
-                        status: 'filed'
+                        status: 'failed'
                     });
 
                 };
             });
     };
 
+    fileChange = (event) => {
+
+        this.setState({
+            selectedFile: event.target.files[0]
+        });
+    };
+
     render() {
 
         if (this.state.status === 'success') {
-            return <Redirect to={'/blog'} />
+            return <Redirect to="/blog" />;
         };
 
         return (
@@ -75,7 +134,7 @@ class CreateArticle extends Component {
 
                         <div className="form-group">
                             <label htmlFor="file0">Imagen</label>
-                            <input type="file" name="file0" />
+                            <input type="file" name="file0" onChange={this.fileChange} />
                         </div>
 
                         <input type="submit" value="guardar" className="btn btn-success" />
