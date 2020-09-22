@@ -12,6 +12,7 @@ import Formulario from './components/Formulario';
 import Search from './components/Search';
 import Article from './components/Article';
 import CreateArticle from './components/CreateArticle';
+import EditArticle from './components/EditArticle';
 
 export default function Router() {
 
@@ -25,6 +26,7 @@ export default function Router() {
                 <Route exact path="/blog" component={Blog} />
                 <Route exact path="/blog/articulo/:id" component={Article} />
                 <Route exact path="/blog/crear" component={CreateArticle} />
+                <Route exact path="/blog/editar/:id" component={EditArticle} />
                 <Route exact path="/blog/busqueda/:search" component={Search} />
 
                 <Route exact path="/redirect/:search" render={(props) => {

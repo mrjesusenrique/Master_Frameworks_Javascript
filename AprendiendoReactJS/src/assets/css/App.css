@@ -248,6 +248,14 @@ textarea{
 
 }
 
+.thumb{
+  width: 170px;
+  float: left;
+  display: block;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
 .radio-buttons{
   margin-top: 10px;
   float: left;

@@ -5,7 +5,8 @@ import 'moment/locale/es';
 import Global from '../Global';
 import Sidebar from './Sidebar';
 import imageNotFound from '../assets/images/notFound.jpg';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
 class Article extends Component {
 
@@ -39,7 +40,44 @@ class Article extends Component {
             });
     };
 
+    deleteArticle = (id) => {
+
+        swal({
+            title: "¿Seguro que desea eliminar el artículo?",
+            text: "Su artículo será eliminado de manera permanende de la Base de Datos",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axios.delete(`${this.url}article/${id}`)
+                        .then(res => {
+                            this.setState({
+                                article: res.data.article,
+                                status: 'deleted'
+                            });
+
+                            swal(
+                                'Artículo eliminado',
+                                'Su artículo se ha eliminado de manera éxitosa',
+                                'success'
+                            );
+                        });
+                } else {
+                    swal(
+                        'Tranquilo',
+                        'Su artículo no ha sido eliminado',
+                    );
+                }
+            });
+    };
+
     render() {
+
+        if (this.state.status === 'deleted') {
+            return <Redirect to="/blog" />
+        };
 
         var article = this.state.article;
 
@@ -69,8 +107,11 @@ class Article extends Component {
 
                             <p>{article.content}</p>
 
-                            <Link to="/blog" className="btn btn-danger">Eliminar</Link>
-                            <Link to="/blog" className="btn btn-warning">Editar</Link>
+                            <button onClick={() => { this.deleteArticle(article._id) }}
+                                className="btn btn-danger">Eliminar
+                            </button>
+
+                            <Link to={`/blog/editar/${article._id}`} className="btn btn-warning">Editar</Link>
 
                             <div className="clearfix"></div>
                         </article>
